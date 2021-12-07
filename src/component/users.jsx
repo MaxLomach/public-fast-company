@@ -8,14 +8,27 @@ const Users = () => {
     const handleDelId = (id) => {
         setUsers(users.filter(users => users._id !== id))
     }
-
+    
     const GetUserApi = (_id) => {
+        
         const createTableHTML = users.map(user => {
+
+            const GetQualities = () => {
+                return (
+                 user.qualities.map(qualities => 
+                    <span 
+                        className={`mx-1 badge bg-${qualities.color}`}
+                    >
+                        {`${qualities.name} `}
+                    </span>)
+                )
+            }
+
             return (
             <tr>
                 <td>{user.name}</td>
-                {/* <td>{user.p}</td> */}
-                <td></td>
+                <td>{GetQualities()}</td>
+                <td>{user.profession.name}</td>
                 <td>{user.completedMeetings}</td>
                 <td>{user.rate}</td>
                 <td>
@@ -27,26 +40,27 @@ const Users = () => {
                         {_id} Dellete
                     </button>    
                 </td>
-            </tr>)
+            </tr>
+            )
         })
         return createTableHTML
     }
     
     return (
         <>
-        
-        <table className="table table-bordered">
-            <thead>
+        <span></span>
+        <table className="table table-hover bg-success bg-opacity-25">
+            <thead className="text-center bg-success bg-opacity-50">
                 <tr>
                 <th scope="col">Имя</th>
                 <th scope="col">Качества</th>
-                <th scope="col">Провфессия</th>
+                <th scope="col">Профессия</th>
                 <th scope="col">Встретился(раз)</th>
                 <th scope="col">Оценка</th>
                 <th scope="col"></th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody className="text-center">
                 {GetUserApi()}
             </tbody>
         </table>
