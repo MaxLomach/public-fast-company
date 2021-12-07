@@ -3,10 +3,24 @@ import API from '../API'
 
 const Users = () => {
     const [users, setUsers] = useState(API.users.fetchAll())
-    console.log(users)
+    
+    const Info = () => {
+        const styles = 'badge bg-info text-dark my-3 d-block'
+        return users.length === 0?
+            <h1><span className={`${styles} bg-danger`}>Нет ни кого!</span></h1>:
+            users.length === 1?
+            <h1><span className={styles}>{`${users.length} человек проведёт с тобой время`}</span></h1>:
+            users.length === 2 || users.length === 3 || users.length === 4?
+            <h1><span className={styles}>{`${users.length} человека проведёт с тобой время`}</span></h1>:
+            <h1><span className={styles}>{`${users.length} человек проведут с тобой время`}</span></h1>
+    }
+    
 
     const handleDelId = (id) => {
         setUsers(users.filter(users => users._id !== id))
+        // if (users.length === 1) {
+        //     const table = document.querySelector('table')
+        //     table.remove()}
     }
     
     const GetUserApi = (_id) => {
@@ -46,9 +60,11 @@ const Users = () => {
         return createTableHTML
     }
     
-    return (
+    return  users.length === 0?
+            <Info/>:
+        (
         <>
-        <span></span>
+        <Info />
         <table className="table table-hover bg-success bg-opacity-25">
             <thead className="text-center bg-success bg-opacity-50">
                 <tr>
