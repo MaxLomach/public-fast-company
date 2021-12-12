@@ -1,44 +1,19 @@
-import React,{ useState } from "react"
-import API from "../API"
+import React from "react"
 
 const BookMark = (props) => {
-    const [users, setUsers] = useState(API.users.fetchAll())
-    const State = (id) => {
-        const newBookmark = (users.map(element => {
-            if (element._id === id) 
-                if(element.bookmark === true)
-                    {element.bookmark = false}
-                else
-                    {element.bookmark = true}
-                
-            return element
-        }))
-
-        setUsers(newBookmark)
-    }
-
+    
     const Switch = (state) => {
-        let StyleBookmark = 'on'
-        if (state === true) {
-            StyleBookmark = 'on'
-        }
-        else {
-            StyleBookmark = "off"
-        }
-        return(
-            
-            <i className={`bi bi-toggle-${StyleBookmark}`}></i>
-        ) 
+        console.log(props.bookmark)
+        return state? 'bi bi-toggle-on': 'bi bi-toggle-off'
     } 
 
     return(
-    <button 
-        className="btn"
-        onClick={() => State(props._id)}
-    >
-        {Switch(props.bookmark)}
-    </button>
+        <button 
+            className="btn"
+            onClick={props.onToggle}
+        >
+            <i className={Switch(props.bookmark)}></i>
+        </button>
     )
 }
-
 export default BookMark

@@ -1,6 +1,7 @@
 import React,{useState} from 'react'
 import BookMark from './bookMark'
 import API from '../API'
+import '../index.css'
 
 const GetUserApi = () => {
     const [users, setUsers] = useState(API.users.fetchAll())
@@ -8,9 +9,22 @@ const GetUserApi = () => {
     const handleDelId = (id) => {
     setUsers(users.filter(users => users._id !== id))
     }
-
+    
     const createTableHTML = users.map(user => {
-        
+
+        const newState = () => {
+            const newBookmark = (users.map(element => {
+                if (element._id === user._id) {
+                    if(element.bookmark === true)
+                        {element.bookmark = false}
+                    else
+                        {element.bookmark = true}
+                }
+                return element
+            }))
+            setUsers(newBookmark)
+        }
+
         const GetQualities = () => {
             return (
              user.qualities.map(qualities => 
@@ -30,7 +44,8 @@ const GetUserApi = () => {
             <td>{user.completedMeetings}</td>
             <td>{user.rate}</td>
             <td>
-                <BookMark 
+                <BookMark
+                onToggle={newState}
                 {...user}
                 />
             </td>
