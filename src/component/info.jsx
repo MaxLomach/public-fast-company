@@ -14,4 +14,5 @@ const Info = () => {
         <h1><span className={styles}>{`${users.length} человек проведут с тобой время`}</span></h1>
 }
 
+
 export default Info

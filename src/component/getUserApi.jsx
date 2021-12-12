@@ -9,7 +9,7 @@ const GetUserApi = () => {
     const handleDelId = (id) => {
     setUsers(users.filter(users => users._id !== id))
     }
-    
+
     const createTableHTML = users.map(user => {
 
         const newState = () => {
@@ -62,5 +62,6 @@ const GetUserApi = () => {
     })
     return createTableHTML
 }
+
 
 export default GetUserApi

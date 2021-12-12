@@ -28,7 +28,6 @@ const Users = () => {
                 <th scope="col"></th>
                 </tr>
             </thead>
-            
             <tbody className="text-center">
                 <GetUserApi 
                 {...users}
