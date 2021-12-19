@@ -1,18 +1,33 @@
-import React,{useState} from "react"
-import API from "../API"
+import React from "react";
 
-const Info = () => {
-    const [users] = useState(API.users.fetchAll())
+const Info = (props) => {
+  const styles = "badge bg-info text-dark my-3 d-block";
 
-    const styles = 'badge bg-info text-dark my-3 d-block'
-    return users.length === 0?
-        <h1><span className={`${styles} bg-danger`}>Нет ни кого!</span></h1>:
-        users.length === 1?
-        <h1><span className={styles}>{`${users.length} человек проведёт с тобой время`}</span></h1>:
-        users.length === 2 || users.length === 3 || users.length === 4?
-        <h1><span className={styles}>{`${users.length} человека проведёт с тобой время`}</span></h1>:
-        <h1><span className={styles}>{`${users.length} человек проведут с тобой время`}</span></h1>
-}
+  return props.itemsCount === 0 ? (
+    <h1>
+      <span className={`${styles} bg-danger`}>Нет ни кого!</span>
+    </h1>
+  ) : props.itemsCount === 1 ? (
+    <h1>
+      <span
+        className={styles}
+      >{`${props.itemsCount} человек проведёт с тобой время`}</span>
+    </h1>
+  ) : props.itemsCount === 2 ||
+    props.itemsCount === 3 ||
+    props.itemsCount === 4 ? (
+    <h1>
+      <span
+        className={styles}
+      >{`${props.itemsCount} человека проведёт с тобой время`}</span>
+    </h1>
+  ) : (
+    <h1>
+      <span
+        className={styles}
+      >{`${props.itemsCount} человек проведут с тобой время`}</span>
+    </h1>
+  );
+};
 
-
-export default Info
+export default Info;
