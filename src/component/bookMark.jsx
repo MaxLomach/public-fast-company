@@ -1,14 +1,19 @@
-import React from "react";
+import PropTypes from 'prop-types'
+import React from 'react'
 
 const BookMark = (props) => {
   const Switch = (state) => {
-    return state ? "bi bi-toggle-on" : "bi bi-toggle-off";
-  };
+    return state ? 'bi bi-toggle-on' : 'bi bi-toggle-off'
+  }
 
   return (
-    <button className="btn" onClick={props.onToggle}>
+    <button className='btn' onClick={props.onToggle}>
       <i className={Switch(props.bookmark)}></i>
     </button>
-  );
-};
-export default BookMark;
+  )
+}
+BookMark.propTypes = {
+  onToggle: PropTypes.func.isRequired,
+  bookmark: PropTypes.string.isRequired
+}
+export default BookMark

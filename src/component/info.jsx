@@ -1,7 +1,8 @@
-import React from "react";
+import PropTypes from 'prop-types'
+import React from 'react'
 
 const Info = (props) => {
-  const styles = "badge bg-info text-dark my-3 d-block";
+  const styles = 'badge bg-info text-dark my-3 d-block'
 
   return props.itemsCount === 0 ? (
     <h1>
@@ -27,7 +28,10 @@ const Info = (props) => {
         className={styles}
       >{`${props.itemsCount} человек проведут с тобой время`}</span>
     </h1>
-  );
-};
+  )
+}
+Info.propTypes = {
+  itemsCount: PropTypes.number.isRequired
+}
 
-export default Info;
+export default Info

@@ -1,26 +1,43 @@
-import React from "react";
-import _ from "lodash";
+import React from 'react'
+import _ from 'lodash'
+import PropTypes from 'prop-types'
 
-const Pagination = (props) => {
-  const { itemsCount, pageSize } = props;
+const Pagination = ({ itemsCount, pageSize, onPageChange, currentPage }) => {
+  // const {  } = props;
   // const pageCount = itemsCount/pageSize       // 12 / 4
-  //что бы избежать ощибок округлим в большую сторону
-  const pageCount = Math.ceil(itemsCount / pageSize);
-  if (pageCount === 1) return null;
-  const pages = _.range(1, pageCount + 1);
+  // что бы избежать ощибок округлим в большую сторону
+  const pageCount = Math.ceil(itemsCount / pageSize)
+  if (pageCount === 1) return null
+  const pages = _.range(1, pageCount + 1)
+
   return (
     <nav>
-      <ul className="pagination">
+      <ul className='pagination justify-content-center'>
         {pages.map((page) => (
-          <li className="page-item" key={"page_" + page}>
-            <a href="#" className="page-link">
+          <li
+            className={'page-item' + (page === currentPage ? ' active' : '')}
+            key={'page_' + page}
+          >
+            <button
+              className='page-link'
+              onClick={() => {
+                onPageChange(page)
+              }}
+            >
               {page}
-            </a>
+            </button>
           </li>
         ))}
       </ul>
     </nav>
-  );
-};
+  )
+}
 
-export default Pagination;
+Pagination.propTypes = {
+  itemsCount: PropTypes.number.isRequired,
+  pageSize: PropTypes.number.isRequired,
+  onPageChange: PropTypes.func.isRequired,
+  currentPage: PropTypes.number.isRequired
+}
+
+export default Pagination
