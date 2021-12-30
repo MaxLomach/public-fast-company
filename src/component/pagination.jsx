@@ -12,14 +12,14 @@ const Pagination = ({ itemsCount, pageSize, onPageChange, currentPage }) => {
 
   return (
     <nav>
-      <ul className='pagination justify-content-center'>
+      <ul className='pagination justify-content-center mt-3'>
         {pages.map((page) => (
           <li
             className={'page-item' + (page === currentPage ? ' active' : '')}
             key={'page_' + page}
           >
             <button
-              className='page-link'
+              className='bg-success bg-opacity-50 text-black page-link'
               onClick={() => {
                 onPageChange(page)
               }}
