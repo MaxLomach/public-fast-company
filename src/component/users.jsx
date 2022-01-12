@@ -1,53 +1,26 @@
 import React, { useState, useEffect } from 'react'
 import API from '../API'
-import '../index.css'
 import { paginate } from '../utils/paginate'
 import GetUserApi from './getUserApi'
 import Info from './info'
 import Pagination from './pagination'
 import GroupList from './groupList'
 
-const Users = () => {
-  const [professions, setProfessions] = useState(API.professions.fetchAll())
-  const [users, setUsers] = useState(API.users.fetchAll())
+const Users = ({ users, handleDelId, newState }) => {
+  const [professions, setProfessions] = useState()
   const [currentPage, setCurrentPage] = useState(1)
   const [selectedProf, setSelectedProf] = useState()
-
-  // const count = users.length
-  const pageSize = 2
+  console.log(professions)
+  const pageSize = 4
 
   useEffect(() => {
-    API.professions.fetchAll().then((date) =>
-      setProfessions(
-        // Object.assign(
-        date
-        // { allPropfession: { name: 'Все профессии' } }
-        // )
-      )
-    )
+    API.professions.fetchAll().then((date) => setProfessions(date))
   }, [])
+  console.log(professions)
 
   useEffect(() => {
     setCurrentPage(1)
   }, [selectedProf])
-
-  const newState = (user) => {
-    const newBookmark = users.map((element) => {
-      if (element._id === user._id) {
-        if (element.bookmark === true) {
-          element.bookmark = false
-        } else {
-          element.bookmark = true
-        }
-      }
-      return element
-    })
-    setUsers(newBookmark)
-  }
-
-  const handleDelId = (id) => {
-    setUsers(users.filter((user) => user._id !== id))
-  }
 
   const handlePageChange = (pageIndex) => {
     setCurrentPage(pageIndex)
@@ -57,9 +30,11 @@ const Users = () => {
     setSelectedProf(item)
   }
 
-  const filteredUsers = selectedProf //&& selectedProf._id
+  const filteredUsers = selectedProf
     ? users.filter((user) => user.profession === selectedProf)
     : users
+
+  console.log(filteredUsers)
   const count = filteredUsers.length
 
   const userCrop = paginate(filteredUsers, currentPage, pageSize)
@@ -71,7 +46,7 @@ const Users = () => {
   return count === 0 ? (
     <Info itemsCount={count} {...users} />
   ) : (
-    <div className='container'>
+    <div className='container-fluid'>
       <div className='row'>
         <Info itemsCount={count} {...users} />
       </div>
@@ -82,13 +57,11 @@ const Users = () => {
               <GroupList
                 selectedItem={selectedProf}
                 items={professions}
-                // valueProperty='_id'
-                // contentProperty='name'
                 onItemSelect={handleProffesionSelect}
               />
               <div className='d-grid'>
                 <button
-                  className='btn  btn-outline-success btn-sm mt-2'
+                  className='btn  btn-outline-success btn-sm mt-2 mb-2'
                   onClick={clearFilter}
                 >
                   {' '}

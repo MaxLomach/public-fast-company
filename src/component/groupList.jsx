@@ -10,7 +10,8 @@ const GroupList = ({
   console.log(items)
   return (
     <ul className='list-group text-center'>
-      {Object.keys(items).map((item) => (
+      {items.map((item) => (
+        // {Object.keys(items).map((item) => (
         <li
           key={items[item][valueProperty]}
           onClick={() => onItemSelect(items[item])}
