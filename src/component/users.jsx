@@ -10,13 +10,12 @@ const Users = ({ users, handleDelId, newState }) => {
   const [professions, setProfessions] = useState()
   const [currentPage, setCurrentPage] = useState(1)
   const [selectedProf, setSelectedProf] = useState()
-  console.log(professions)
+
   const pageSize = 4
 
   useEffect(() => {
     API.professions.fetchAll().then((date) => setProfessions(date))
   }, [])
-  console.log(professions)
 
   useEffect(() => {
     setCurrentPage(1)
@@ -29,12 +28,11 @@ const Users = ({ users, handleDelId, newState }) => {
   const handleProffesionSelect = (item) => {
     setSelectedProf(item)
   }
-
   const filteredUsers = selectedProf
-    ? users.filter((user) => user.profession === selectedProf)
+    ? users.filter((user) => user.profession._id === selectedProf._id)
     : users
+  console.log(professions)
 
-  console.log(filteredUsers)
   const count = filteredUsers.length
 
   const userCrop = paginate(filteredUsers, currentPage, pageSize)
