@@ -5,12 +5,24 @@ import PropTypes from 'prop-types'
 import BookMark from './bookMark'
 import QualitiesList from './qualitiesList'
 import Table from './table'
+import { Link, Route, Switch } from 'react-router-dom'
+import UserById from './userById'
 
 const UserTable = ({ onSort, selectedSort, onDel, newState, users }) => {
   const columns = {
     name: {
       path: 'name',
-      name: 'Имя'
+      name: 'Имя',
+      component: (user) => (
+        <>
+          <Link className='link-style' to={`userById/${user._id}`}>
+            {user.name}
+          </Link>
+          <Switch>
+            <Route path='/userById' component={UserById} />
+          </Switch>
+        </>
+      )
     },
     qualities: {
       name: 'Качества',

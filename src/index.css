@@ -21,3 +21,22 @@ code {
   position: relative;
   left: -50%;
 }
+
+.card {
+  margin: 2% auto;
+  width: 350px;
+}
+
+.bold-style-for-card-text {
+  font-weight: bold;
+}
+
+.link-style:link,
+.link-style:active,
+.link-style:visited {
+  text-decoration: none;
+  color: black;
+}
+.link-style:hover {
+  font-weight: bold;
+}

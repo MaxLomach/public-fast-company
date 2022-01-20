@@ -16,9 +16,9 @@ const Users = () => {
     iter: 'name',
     order: 'asc'
   })
-  const pageSize = 8
-
   const [users, setUsers] = useState()
+
+  const pageSize = 8
 
   useEffect(() => {
     API.users.fetchAll().then((date) => setUsers(date))
@@ -128,8 +128,8 @@ const Users = () => {
     <>
       <div className='container-for-loader'>
         <div className='loader'>
-          <div class='spinner-border text-info' role='status'>
-            <span class='visually-hidden'>Loading...</span>
+          <div className='spinner-border text-info' role='status'>
+            <span className='visually-hidden'>Loading...</span>
           </div>
         </div>
       </div>

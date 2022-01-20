@@ -35,29 +35,6 @@ const TableHeader = ({ onSort, selectedSort, columns }) => {
             />
           </th>
         ))}
-        {/* 
-        <th scope='col'>Качества</th>
-        <th
-          onClick={() => handleSort('profession.name')}
-          role={'button'}
-          scope='col'
-        >
-          Профессия
-        </th>
-        <th
-          onClick={() => handleSort('completedMeetings')}
-          role={'button'}
-          scope='col'
-        >
-          Встретился(раз)
-        </th>
-        <th onClick={() => handleSort('rate')} role={'button'} scope='col'>
-          Оценка
-        </th>
-        <th onClick={() => handleSort('bookmark')} role={'button'} scope='col'>
-          Избранное
-        </th>
-        <th scope='col'></th> */}
       </tr>
     </thead>
   )
