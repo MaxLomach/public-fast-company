@@ -73,6 +73,7 @@ const Users = () => {
       (user) => user.name.toLowerCase().indexOf(item) !== -1
     )
     console.log(searchUsers)
+    setSearchElement(searchUsers)
   }
 
   useEffect(() => {
