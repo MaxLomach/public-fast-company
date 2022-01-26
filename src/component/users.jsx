@@ -7,6 +7,7 @@ import GroupList from './groupList'
 import UserTable from './usersTable'
 import _ from 'lodash'
 import '../index'
+import Search from './search'
 
 const Users = () => {
   const [professions, setProfessions] = useState()
@@ -17,6 +18,7 @@ const Users = () => {
     order: 'asc'
   })
   const [users, setUsers] = useState()
+  const [searchElement, setSearchElement] = useState('')
 
   const pageSize = 8
 
@@ -56,11 +58,27 @@ const Users = () => {
 
   const handleProffesionSelect = (item) => {
     setSelectedProf(item)
+    setSearchElement()
   }
 
   const handleSort = (item) => {
+    console.log(item)
     setSortBy(item)
   }
+
+  const handlSearch = (item) => {
+    setSelectedProf()
+
+    const searchUsers = users.filter(
+      (user) => user.name.toLowerCase().indexOf(item) !== -1
+    )
+    console.log(searchUsers)
+  }
+
+  useEffect(() => {
+    console.log(searchElement)
+    // setUsers(searchElement)
+  }, [searchElement])
 
   if (users) {
     const filteredUsers = selectedProf
@@ -84,6 +102,7 @@ const Users = () => {
         <div className='row'>
           <Info itemsCount={count} {...users} />
         </div>
+
         <div className='row'>
           <div className='col-lg-2 col-md-2'>
             {professions && (
@@ -106,6 +125,7 @@ const Users = () => {
             )}
           </div>
           <div className='col-lg-10 col-md-10 '>
+            <Search onSearch={handlSearch} />
             <UserTable
               users={userCrop}
               onDel={handleDelId}
