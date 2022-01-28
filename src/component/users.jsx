@@ -62,7 +62,6 @@ const Users = () => {
   }
 
   const handleSort = (item) => {
-    console.log(item)
     setSortBy(item)
   }
 
@@ -72,17 +71,13 @@ const Users = () => {
     const searchUsers = users.filter(
       (user) => user.name.toLowerCase().indexOf(item) !== -1
     )
-    console.log(searchUsers)
     setSearchElement(searchUsers)
   }
 
-  useEffect(() => {
-    console.log(searchElement)
-    // setUsers(searchElement)
-  }, [searchElement])
-
   if (users) {
-    const filteredUsers = selectedProf
+    const filteredUsers = searchElement
+      ? searchElement
+      : selectedProf
       ? users.filter((user) => user.profession._id === selectedProf._id)
       : users
 
