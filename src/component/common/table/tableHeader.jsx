@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import IconSort from './iconSort'
+import IconSort from '../../iconSort.jsx'
 
 const TableHeader = ({ onSort, selectedSort, columns }) => {
   const handleSort = (item) => {

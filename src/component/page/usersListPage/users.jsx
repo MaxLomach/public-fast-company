@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react'
-import API from '../API'
-import { paginate } from '../utils/paginate'
-import Info from './info'
-import Pagination from './pagination'
-import GroupList from './groupList'
-import UserTable from './usersTable'
+import API from '../../../API'
+import { paginate } from '../../../utils/paginate'
+import Info from '../../ui/info'
+import Pagination from '../../common/pagination.jsx'
+import GroupList from './'
+import UserTable from '../../ui/usersTable'
 import _ from 'lodash'
-import '../index'
-import Search from './search'
+import '../../../index'
+import Search from '../../search'
 
 const Users = () => {
   const [professions, setProfessions] = useState()

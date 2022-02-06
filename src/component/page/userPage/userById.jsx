@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import API from '../API'
-import QualitiesList from './qualitiesList'
+import API from '../../../API'
+import QualitiesList from '../../ui/qualities/qualitiesList'
 import { useParams, Link, Route, Switch } from 'react-router-dom'
-import User from './layout/user'
-import avatar from '../image/avatar.png'
+import User from '../../../layout/user'
+import avatar from '../../../image/avatar.png'
 
 const UserById = () => {
   const params = useParams()
@@ -12,7 +12,7 @@ const UserById = () => {
   const [userId, setUserById] = useState()
   useEffect(() => {
     API.users.getById(userById).then((date) => setUserById(date))
-  }, [])
+  })
 
   return userId ? (
     <>

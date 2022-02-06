@@ -2,11 +2,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 // import TableHeader from './tableHeader'
 // import TableBody from './tableBody'
-import BookMark from './bookMark'
-import QualitiesList from './qualitiesList'
-import Table from './table'
+import BookMark from '../common/bookMark'
+import QualitiesList from './qualities'
+import Table from '../common/table'
 import { Link, Route, Switch } from 'react-router-dom'
-import UserById from './userById'
+import UserById from '../page/userPage/userById'
 
 const UserTable = ({ onSort, selectedSort, onDel, newState, users }) => {
   const columns = {

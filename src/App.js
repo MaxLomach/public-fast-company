@@ -1,12 +1,11 @@
 import React from 'react'
-// import Users from './component/users'
 import { Route, Switch, Redirect, BrowserRouter } from 'react-router-dom'
-import Main from './component/layout/main'
-import Login from './component/layout/login'
-import User from './component/layout/user'
-import NotFound from './component/notFound'
-import NavBar from './component/navBar'
-import UserById from './component/userById'
+import Main from './layout/main'
+import Login from './layout/login'
+import User from './layout/user'
+import NotFound from './component/ui/notFound.jsx'
+import NavBar from './component/ui/navBar'
+import UserById from './component/page/userPage/userById'
 
 const App = () => {
   return (
