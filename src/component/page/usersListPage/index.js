@@ -1,2 +1,2 @@
-import Users from './users'
+import Users from './usersListPage'
 export default Users

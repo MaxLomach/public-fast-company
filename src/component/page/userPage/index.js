@@ -1,2 +1,2 @@
-import UserById from './userById'
+import UserById from './UserById'
 export default UserById
