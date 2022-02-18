@@ -6,21 +6,23 @@ import User from './layout/user'
 import NotFound from './component/ui/notFound.jsx'
 import NavBar from './component/ui/navBar'
 import UserById from './component/page/userPage/userById'
+import UserEdit from './component/page/userPage/userEdit'
 
 const App = () => {
   return (
     <BrowserRouter>
-      <div>
+      <>
         <NavBar />
         <Switch>
-          <Route path='/' exact component={Main} />
-          <Route path='/login' component={Login} />
+          <Route path='/user/:userById/userEdit' component={UserEdit} />
+          <Route path='/user/:userById?' component={UserById} />
+          <Route path='/login/:type?' component={Login} />
           <Route path='/user' component={User} />
-          <Route path='/userById/:userById?' component={UserById} />
           <Route path='/404' component={NotFound} />
+          <Route path='/' exact component={Main} />
           <Redirect to='/404' />
         </Switch>
-      </div>
+      </>
     </BrowserRouter>
   )
 }

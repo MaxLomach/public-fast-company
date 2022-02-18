@@ -5,6 +5,10 @@ import { useState } from 'react/cjs/react.development'
 const TextField = ({ label, type, name, value, onChange, error }) => {
   const [showPassword, setShowPassword] = useState(false)
 
+  const handleChange = ({ target }) => {
+    onChange({ name: target.name, value: target.value })
+  }
+
   const getInputClasses = () => {
     return 'form-control' + (error ? ' is-invalid' : '')
   }
@@ -15,7 +19,9 @@ const TextField = ({ label, type, name, value, onChange, error }) => {
 
   return (
     <div className='mb-4 '>
-      <label htmlFor={name}>{label}</label>
+      <label className='form-label' htmlFor={name}>
+        {label}
+      </label>
       <div className='input-group has-validation'>
         <input
           className={getInputClasses()}
@@ -23,7 +29,7 @@ const TextField = ({ label, type, name, value, onChange, error }) => {
           name={name}
           id={name}
           value={value}
-          onChange={onChange}
+          onChange={handleChange}
         />
         {type === 'password' && (
           <button

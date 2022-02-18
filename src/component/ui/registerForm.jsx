@@ -1,37 +1,33 @@
 import React, { useEffect, useState } from 'react'
 import TextField from '../common/form/textField'
 import { validator } from '../../utils/validator'
+import API from '../../API'
+import SelectField from '../common/form/selectField'
+import RadioField from '../common/form/radioField'
+import MultiSelectField from '../common/form/multiSelectField'
 import CheckBoxField from '../common/form/checkBoxField'
-// import * as yup from 'yup'
 
-const LoginForm = () => {
-  const [data, setData] = useState({ email: '', password: '', stayOn: false })
+const RegisterForm = () => {
+  const [data, setData] = useState({
+    email: '',
+    password: '',
+    professions: '',
+    sex: 'male',
+    qualities: [],
+    licence: false
+  })
+  const [qualities, setQualities] = useState({})
   const [errors, setErrors] = useState({})
+  const [professions, setProfessions] = useState()
+
+  useEffect(() => {
+    API.professions.fetchAll().then((date) => setProfessions(date))
+    API.qualities.fetchAll().then((date) => setQualities(date))
+  }, [])
 
   const handlChange = (target) => {
     setData((prevState) => ({ ...prevState, [target.name]: target.value }))
   }
-
-  // const validatorSchema = yup.object().shape({
-  //   password: yup
-  //     .string()
-  //     .required('пароль обязателен для заполнения')
-  //     .matches(
-  //       /(?=.*[A-Z])/,
-  //       'Пароль дожен содержать хотя бы одну заглавную букву'
-  //     )
-  //     .matches(/(?=.*[0-9])/, 'пароль должен содержать хотя бы одну цифру')
-  //     .matches(
-  //       /(?=.*[!@#$%^&*])/,
-  //       'пароль должен содержать хотя бы один специальный символ: "!@#$%^&*"'
-  //     )
-  //     .matches(/?=.{8}/, 'Пароль должен содержать минимум 8 символов'),
-  //   email: yup
-  //     .string()
-  //     .required('эл. почта обязательна для заполнения')
-  //     .email('Email введен некоректно')
-  // })
-
   const validatorConfig = {
     email: {
       isRequired: { messege: 'эл. почта обязательна для заполнения' },
@@ -44,6 +40,16 @@ const LoginForm = () => {
       },
       isContainDigit: { messege: 'пароль должен содержать хотя бы одну цифру' },
       min: { messege: 'Пароль должен содержать минимум 8 символов', value: 8 }
+    },
+    professions: {
+      isRequired: {
+        messege: 'Обязательно выберете Вашу профессию'
+      }
+    },
+    licence: {
+      isRequired: {
+        messege: 'Confirm the license agreement'
+      }
     }
   }
   useEffect(() => {
@@ -51,10 +57,6 @@ const LoginForm = () => {
   }, [data])
   const validate = () => {
     const errors = validator(data, validatorConfig)
-    // validatorSchema
-    //   .validate(data)
-    //   .then(() => setErrors({}))
-    //   .catch((err) => setErrors({ [err.path]: err.messege }))
 
     setErrors(errors)
     return Object.keys(errors).length === 0
@@ -78,16 +80,47 @@ const LoginForm = () => {
         error={errors.email}
       />
       <TextField
-        label='Enter your password'
+        label='Create a password'
         type='password'
         name='password'
         value={data.password}
         onChange={handlChange}
         error={errors.password}
       />
-
-      <CheckBoxField name='stayOn' value={data.stayOn} onChange={handlChange}>
-        Remain in the system
+      <SelectField
+        label='Choose your proffesion:'
+        onChange={handlChange}
+        options={professions}
+        defaultOption='Choose..'
+        error={errors.professions}
+        value={data.professions}
+        name='professions'
+      />
+      <RadioField
+        option={[
+          { name: 'Male', value: 'male' },
+          { name: 'Female', value: 'female' },
+          { name: 'Other', value: 'other' }
+        ]}
+        value={data.sex}
+        name='sex'
+        onChange={handlChange}
+        label='Choose your gender'
+      />
+      <MultiSelectField
+        options={qualities}
+        onChange={handlChange}
+        name='qualities'
+        label='Add your qualities'
+        defaultValue={data.qualities}
+      />
+      <CheckBoxField
+        name='licence'
+        value={data.licence}
+        onChange={handlChange}
+        error={errors.licence}
+      >
+        <a>License agreement</a>
       </CheckBoxField>
       <button
         className={
@@ -102,4 +135,4 @@ const LoginForm = () => {
   )
 }
 
-export default LoginForm
+export default RegisterForm
