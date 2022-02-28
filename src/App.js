@@ -5,7 +5,6 @@ import Login from './layout/login'
 import User from './layout/user'
 import NotFound from './component/ui/notFound.jsx'
 import NavBar from './component/ui/navBar'
-import UserById from './component/page/userPage/userById'
 import UserEdit from './component/page/userPage/userEdit'
 
 const App = () => {
@@ -14,8 +13,8 @@ const App = () => {
       <>
         <NavBar />
         <Switch>
-          <Route path='/user/:userById/userEdit' component={UserEdit} />
-          <Route path='/user/:userById?' component={User} />
+          {/* <Route path='/user/:userById/edit' component={UserEdit} /> */}
+          <Route path='/user/:userById?/:edit?' component={User} />
           <Route path='/login/:type?' component={Login} />
           <Route path='/404' component={NotFound} />
           <Route path='/' exact component={Main} />

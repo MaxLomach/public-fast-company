@@ -14,7 +14,7 @@ const UserById = ({ userById }) => {
     history.push('/user')
   }
   const handleClickToEdit = () => {
-    history.push(`/user/${userId._id}/userEdit`)
+    history.push(`/user/${userId._id}/edit`)
   }
 
   return userId ? (
