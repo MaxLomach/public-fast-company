@@ -15,9 +15,8 @@ const App = () => {
         <NavBar />
         <Switch>
           <Route path='/user/:userById/userEdit' component={UserEdit} />
-          <Route path='/user/:userById?' component={UserById} />
+          <Route path='/user/:userById?' component={User} />
           <Route path='/login/:type?' component={Login} />
-          <Route path='/user' component={User} />
           <Route path='/404' component={NotFound} />
           <Route path='/' exact component={Main} />
           <Redirect to='/404' />

@@ -10,6 +10,7 @@ import '../../../index'
 import Search from '../../search'
 
 const Users = () => {
+  console.log('user')
   const [professions, setProfessions] = useState()
   const [currentPage, setCurrentPage] = useState(1)
   const [selectedProf, setSelectedProf] = useState()

@@ -1,18 +1,21 @@
 import React, { useState, useEffect } from 'react'
 import API from '../../../API'
 import QualitiesList from '../../ui/qualities/qualitiesList'
-import { useParams, Link, Route, Switch } from 'react-router-dom'
-import User from '../../../layout/user'
 import avatar from '../../../image/avatar.png'
-import UserEdit from './userEdit'
+import { useHistory } from 'react-router-dom'
 
-const UserById = () => {
-  const { userById } = useParams()
-
+const UserById = ({ userById }) => {
+  const history = useHistory()
   const [userId, setUserById] = useState()
   useEffect(() => {
     API.users.getById(userById).then((date) => setUserById(date))
   }, [])
+  const handleClickToUser = () => {
+    history.push('/user')
+  }
+  const handleClickToEdit = () => {
+    history.push(`/user/${userId._id}/userEdit`)
+  }
 
   return userId ? (
     <>
@@ -41,28 +44,23 @@ const UserById = () => {
             <span className='bold-style-for-card-text'>{userId.rate}</span>
           </p>
           <div className='btn-group w-100'>
-            <Link type='button' className='btn btn-success btn-sm ' to='/user'>
+            <button
+              type='button'
+              className='btn btn-success btn-sm '
+              onClick={handleClickToUser}
+            >
               All Users
-            </Link>
-            <Link
+            </button>
+            <button
               type='button'
               className='btn btn-warning btn-sm '
-              to={`${userId._id}/userEdit`}
+              onClick={handleClickToEdit}
             >
               Edit
-            </Link>
-            <Link to={`/user/${userId._id}/edit`}>
-              <button className='btn btn-warning btn-sm'>
-                Все пользователи Изменить
-              </button>
-            </Link>
+            </button>
           </div>
         </div>
       </div>
-      {/* <Switch>
-        <Route path='/user' component={User} />
-        <Route path='/:userById/userEdit' component={UserEdit} />
-      </Switch> */}
     </>
   ) : (
     <>

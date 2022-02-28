@@ -14,7 +14,7 @@ const UserTable = ({ onSort, selectedSort, onDel, newState, users }) => {
       path: 'name',
       name: 'Имя',
       component: (user) => (
-        <Link className='link-style' to={`user/${user._id}`}>
+        <Link className='link-style' to={`/user/${user._id}`}>
           {user.name}
         </Link>
       )
